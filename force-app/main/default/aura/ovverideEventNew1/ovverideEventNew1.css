@@ -1,0 +1,63 @@
+.THIS.c-container {
+    border: 2px solid #d8dde6;
+    margin: 10px 0 0px 0;
+    background:white;
+}
+.THIS .selectBox {
+    
+    padding: 0 2rem;
+}
+.THIS .field-title {
+    font-size: .75rem;
+    line-height: 1.25;
+    color: #54698d;
+    margin-bottom: .25rem;
+}
+.THIS .radioBox {
+    text-align:center;
+    padding: 0 2rem;
+}
+.THIS .btn2 {
+    color:white;
+    width:9rem;
+    font-family:sans-serif;
+    height:;
+    float:right;
+    background-color:#4682B4;
+    
+ 
+    
+}
+.THIS .btn1 {
+    color:white;
+    width:9rem;
+    font-family:sans-serif;
+    background-color:#A52A2A;
+    height:;
+    float:left;
+    
+}
+.THIS .row {
+    text-align:center;
+    padding: 0 2rem;
+}
+.THIS .vl{
+   
+    border-left:3px solid silver;
+    height: 36px;
+    margin-left:220px;
+    margin-top:6px;
+    position:absolute;
+      
+}
+.THIS .radio{
+   
+  font-family:arial;
+      
+}
+.THIS #input-date{
+   
+    font-family:arial;
+    width:auto;
+        
+  }

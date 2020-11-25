@@ -1,0 +1,15 @@
+<aura:component>
+    
+    <aura:attribute name="cars" type="Voiture__c[]" />
+
+    <lightning:card title="Voiture">
+        <p class="slds-p-horizontal_small">
+                <aura:iteration items="{!v.cars}" var="car">
+                    <c:carItem car="{!car}"/>
+                </aura:iteration>
+                                   
+         </p>
+    </lightning:card>
+ 
+
+</aura:component>

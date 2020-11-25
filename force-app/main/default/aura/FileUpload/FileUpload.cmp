@@ -1,0 +1,6 @@
+<aura:component >
+     <lightning:card footer="Card Footer" title="Hello">
+       <lightning:button variant="base" label="Base" title="Base action" onclick="{! c.handleClick }"/>
+    </lightning:card>
+	 
+</aura:component>

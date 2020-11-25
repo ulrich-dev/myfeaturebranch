@@ -1,0 +1,165 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:actionOverride,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+  
+     <aura:handler name="init" action="{!c.init}" value="{!this}" />
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'Filiale', 'value': 'Filiale'},
+    {'label': 'Zona', 'value': 'Zona'}
+    ]"/>
+    <aura:attribute name="value" type="String" default=""/>  
+    <aura:attribute name="truthy" type="boolean" default="false"/>
+    <aura:attribute name="filiale" type="boolean" default="false"/>  
+    <aura:attribute name="title" type="String" default="Pianifica Attivita"/>
+    <aura:attribute name="today" type="date" />  
+    <aura:attribute name="StartDate" type="date" />
+    <aura:attribute name="endDate" type="date" />
+    <aura:attribute name="dateValidationError" type="boolean" />
+     <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+     <lightning:workspaceAPI aura:id="workspace"/>
+     
+    <!-- body for modal-->
+     <lightning:listView aura:id="listObjects"
+     objectApiName="Account"
+     listName="Event"
+     rows="5"
+     showSearchBar="true"
+     showActionBar="false"
+     enableInlineEdit="true"
+     showRowLevelActions="false"
+     />
+     
+    <div class="slds-m-around_xx-large">
+        <!--Use aura:if tag to display/hide popup based on isModalOpen value-->  
+        <aura:if isTrue="{!v.isModalOpen}">
+
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Pianifica Attivita</h2>
+                    </header>
+                    <!--Modal/Popup Box Body Starts here-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+                        <div class="c-container">
+     
+        <lightning:layout >
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="row">
+                    <lightning:input type="datetime"  class="{!v.dateValidationError ? 'slds-has-error' : ''}" id="input-date" name="input3" label="Start Date" required="true" onchange="{!c.DateValidation}" value="{!v.StartDate}" />
+                    <aura:if isTrue="{!v.dateValidationError}">
+                        <div class="slds-text-color_error slds-p-left_x-small">
+                         Date must be in present or in future..
+                     </div>
+                    </aura:if> 
+                </div>
+            </lightning:layoutItem>
+         </lightning:layout>
+        
+          <lightning:layout >
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="row">
+                    <lightning:input type="datetime"  class="{!v.dateValidationError ? 'slds-has-error' : ''}" id="input-date" name="input3" label="End Date" required="true" onchange="{!c.endDateValidation}" value="{!v.endDate}" />
+                    <aura:if isTrue="{!v.dateValidationError}">
+                             <div class="slds-text-color_error slds-p-left_x-small">
+                              Date must be in present or in future..
+                          </div>
+                         </aura:if> 
+                </div>
+            </lightning:layoutItem>
+         </lightning:layout>
+     
+      <lightning:layout >
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="selectBox">
+                    <lightning:select name="select1" label="Filiale" >
+                        <option value="">PAVIA</option>
+                        <option value="1">one</option>
+                        <option value="2">two</option>
+                        <option value="3">three</option>
+              </lightning:select>
+</div>
+                    
+            </lightning:layoutItem>
+     </lightning:layout>
+     
+     <lightning:layout >    
+            
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="radioBox">
+                    <div class ="vl" ></div>
+               <lightning:radioGroup class="radio" name="radioGroup"
+                          label=""
+                          options="{!v.options }"
+                          onchange="{!c.zone}"
+                          value="{! v.value }"
+                          type="radio"
+                          />
+                </div>
+                    
+            </lightning:layoutItem>
+     </lightning:layout>
+        
+         <aura:renderIf isTrue="{!v.truthy}">
+              <lightning:layout>
+                     <lightning:layoutItem flexibility="auto" padding="around-small">
+                      <div class="selectBox">
+                            <lightning:select name="select1" label="Zona" >
+                                <option value="">Zona</option>
+                                <option value="1">Zona 1</option>
+                                <option value="2">two</option>
+                                <option value="3">three</option>
+                             </lightning:select>
+        
+                          </div>  
+                    </lightning:layoutItem>
+        
+            </lightning:layout>
+             <aura:set attribute="else">
+                
+             </aura:set>
+      </aura:renderIf> 
+        
+         <aura:renderIf isTrue="{!v.filiale}">
+               <lightning:layout>
+                     <lightning:layoutItem flexibility="auto" padding="around-small">
+                      <div class="selectBox">
+                            <lightning:select name="select1" label="Filiale" >
+                                <option value="">Back Office</option>
+                                <option value="1">Zona 1</option>
+                                <option value="2">two</option>
+                                <option value="3">three</option>
+                             </lightning:select>
+        
+                          </div>  
+                    </lightning:layoutItem>
+            </lightning:layout>
+             </aura:renderIf> 
+        
+      
+ </div>
+                        
+                       
+                    </div>
+                    <!--Modal/Popup Box Footer Starts here-->
+                    <footer class="slds-modal__footer">
+                        <lightning:layout >    
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <div class="buttom">
+            <lightning:button class="btn1" variant="brand" label="Annulla" title="Brand action" onclick="{!c.closeModel }" />
+              <lightning:button class="btn2" variant="brand" label="Modifica e Salva"  disabled="{!v.dateValidationError}" title="Brand action" onclick="{!c.handleClick }" />
+                </div>
+            </lightning:layoutItem>
+     </lightning:layout>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    </div>
+</aura:component>

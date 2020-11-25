@@ -1,0 +1,19 @@
+<aura:component>  
+  
+    <aura:attribute name="thecar" type="Voiture__c" />
+<div class="slds-p-around_medium">
+    <lightning:recordEditForm recordId="{!v.thecar.Id}"  objectApiName="Voiture__c">
+        <!--******************************-->
+    <lightning:messages />
+    <lightning:inputField fieldName="Name"  value="{!v.thecar.Name}" />
+    <lightning:inputField fieldName="Marque__c" value="{!v.thecar.Marque__c}"  />
+    <lightning:inputField fieldName="Couleur__c" value="{!v.thecar.Couleur__c}" />
+    <lightning:inputField fieldName="Nombre_de_places__c"  value="{!v.thecar.Nombre_de_places__c}"/>
+    <lightning:inputField fieldName="Matricule__c" value="{!v.thecar.Matricule__c}" />
+    <lightning:layout horizontalAlign="end" >
+    <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update" />
+    </lightning:layout>
+    </lightning:recordEditForm>
+</div>
+
+</aura:component>

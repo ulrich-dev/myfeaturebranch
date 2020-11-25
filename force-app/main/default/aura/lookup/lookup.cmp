@@ -1,0 +1,19 @@
+<aura:component controller="carController">
+    <aura:registerEvent name="carsLoaded" type="c:lookupevent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    <aura:attribute name="searchTimeoutId" type="Id" />
+    <aura:attribute name="searchTerm" type="String" />
+    <lightning:card title="Car Search" iconName="standard:search">
+        <div class="slds-form slds-p-around_x-small">
+            <lightning:input
+                label="Search"
+                variant="label-hidden"
+                value="{!v.searchTerm}"
+                placeholder="Search by name, phone, website, or address"
+                onchange="{!c.onSearchTermChange}"
+                onclick="{!c.onSearchTermChange}"/>
+
+        </div>
+    </lightning:card>
+    <aura:registerEvent name="thecarss" type="c:lookupevent"/>
+</aura:component>

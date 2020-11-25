@@ -1,0 +1,31 @@
+<aura:component controller="saveTheFile" implements="Flexipage:aviableForAllpageTYpes">
+
+      <!-- attributes -->
+      <aura:attribute name="data" type="Object"/>
+      <aura:attribute name="columns" type="List"/>
+      <aura:attribute name="spinner" type="boolean" default="false"/>
+
+    <div class="container">
+        
+          <div class="imput">
+              <input  type="file" class="file" aura:id="file" /> <br/><br />
+        		<ui:button label="Save" press="{!c.save}"/> 
+   		   </div>
+        
+        <aura:if isTrue="{!v.spinner}">
+                <div class="exampleHolder">
+                         <lightning:spinner alternativeText="Loading..." size="large" />
+                </div>
+        </aura:if>
+
+        <div style="height: 300px;">
+            <lightning:datatable
+                keyField="id"
+                data="{!v.data }"
+                columns="{!v.columns }"
+                hideCheckboxColumn="true"/>
+        </div>   
+            
+    </div>
+	
+</aura:component>

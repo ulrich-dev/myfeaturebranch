@@ -1,0 +1,22 @@
+.THIS.c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    height: 730px;
+    width:  1000px;
+    position:absolute;
+    margin-top: -44%;
+    margin-left: 32%;
+
+}
+
+.THIS .c.list {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    float:center;
+}
+.THIS .field-title {
+    font-size: .75rem;
+    line-height: 1.25;
+    color: #54698d;
+    margin-bottom: .25rem;
+}

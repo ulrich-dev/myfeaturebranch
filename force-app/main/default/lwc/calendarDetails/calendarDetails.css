@@ -1,0 +1,14 @@
+.inputtext{
+font-family:arial;
+
+
+
+}
+.timeInput{
+    position:absolute;
+    margin-left:450px;
+    margin-top:-340px;
+}
+.slds-radio{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,20 @@
+<apex:page id="header" showHeader="false" sidebar="false"  >
+<div class="head"><font size="40"><center>EDUCATION CENTER</center></font></div>
+
+<div align="right" class="icon">
+<apex:image value="https://prelibertina.files.wordpress.com/2015/07/icon.png" width="4%" height="3%"/>
+</div>
+
+<style>
+
+.icon{
+
+    background-color:#003366;
+    color:white;
+    float:center;
+    height:5%;
+    width:113%;
+}
+
+</style> 
+</apex:page>

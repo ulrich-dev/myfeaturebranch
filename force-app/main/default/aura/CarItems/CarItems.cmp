@@ -1,0 +1,25 @@
+<aura:component>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="car" type="Voiture__c"/>
+
+    <lightning:card title="{!v.car.Marque__c}" iconName="standard:scan_card" >
+        <p class="slds-text-heading--medium slds-p-horizontal--small">
+            Name:<lightning:formattedText value="{!v.car.Marque__c}" />
+         </p>
+        
+        <p class="slds-text-heading--medium slds-p-horizontal--small">
+           Marque:<lightning:formattedText value="{!v.car.Marque__c}" />
+        </p>
+        <p class="slds-text-heading--medium slds-p-horizontal--small">
+            Couleur:<lightning:formattedText value="{!v.car.Couleur__c}" />
+         </p>
+         <p>
+            Nombre de place: <lightning:formattedNumber value="{!v.car.Nombre_de_places__c}"/>
+        </p>
+         <p class="slds-text-heading--medium slds-p-horizontal--small">
+            Matricule:<lightning:formattedText value="{!v.car.Matricule__c}" />
+         </p>
+        
+    
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,422 @@
+<template>
+    <!--Use template if:true to display/hide popup based on isModalOpen value--> 
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="margin-bottom: -61px;">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Slot</h2>
+                </header>
+
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="demo-only" style="margin-top:-20px;padding:0.1rem;background:#16325c">
+                        <div class="slds-text-color_inverse">Calendar Details.</div>
+                    </div>
+                        <div class="c-container" style=" border: 1px solid #f8f9fc;float:center; margin-top:10px;padding:0.01rem;">
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small">
+                                            <div class="slds-m-top_medium slds-m-bottom_x-large" style="margin-top:20px;">
+                                                <div class="slds-p-around_medium lgc-bg" style="margin-top:-25px;">
+                                                    <lightning-combobox
+                                                        name="progress"
+                                                        label="Assigned To"
+                                                        value=""
+                                                        placeholder="Select..."
+                                                        options={optionsAssigned}
+                                                        onchange={handleChangeAssigned}
+                                                        required
+                                                    ></lightning-combobox>
+                                                    <br/>
+                                                    <lightning-radio-group
+                                                            options={options}
+                                                            value={option}
+                                                            onchange={isRadioSelect}
+                                                            type="radio"></lightning-radio-group>
+                                                    <br />
+                                                    <template if:true={isRadioSelected}>
+                                                        <lightning-combobox
+                                                        name="progress"
+                                                        label="Punto Vendita"
+                                                        value={valPunto}
+                                                        placeholder="Select..."
+                                                        options={optionsPunto}
+                                                        onchange={handleChangePunto}
+                                                        required
+                                                         ></lightning-combobox>
+                                                    </template>
+                                                    <template if:true={isRadioSelected2}>
+                                                        <lightning-combobox
+                                                        name="progress"
+                                                        label="Zone"
+                                                        value=""
+                                                        placeholder="Select..."
+                                                        options={optionsZone}
+                                                        onchange={handleChangeZone}
+                                                        required
+                                                         ></lightning-combobox>
+                                                    </template>
+                                                        <lightning-combobox
+                                                         name="progress"
+                                                         label="Subject"
+                                                         value=""
+                                                         placeholder="Select..."
+                                                         options={optionsSubject}
+                                                         onchange={handleChangeSubject}
+                                                         required
+                                                         ></lightning-combobox>
+
+                                                    <!-- <lightning-input-field id="fieldid" required="false" variant="label-hidden"
+                                                        value="Zone" disabled={disabled}>
+                                                    </lightning-input-field> -->
+                                                </div>
+
+                                            </div>
+                            </lightning-layout-item>
+
+                            <lightning-layout-item padding="around-small">
+                                        <div class="slds-m-top_medium slds-m-bottom_x-large" style="margin-top:-25px;">
+                                            <div class="slds-p-around_medium lgc-bg">
+
+                                                <lightning-layout>
+                                                    <lightning-layout-item>
+                                                        <lightning-input type="date"  label="Date" name="input5" value="" min="2020-11-20" max="2020-11-22" ></lightning-input>
+                                                        <lightning-input type="date"  label="Date" name="input5" value="" min="2020-11-20" max="2020-11-22" ></lightning-input>
+                                                    </lightning-layout-item>
+
+                                                    <lightning-layout-item>
+                                                        <lightning-combobox
+                                                        name="progress"
+                                                        label="Time"
+                                                        value={statTime}
+                                                        placeholder="Select Progress"
+                                                        options={optionsTimes}
+                                                        onchange={handleChangeStartTime} ></lightning-combobox>
+
+                                                        <lightning-combobox
+                                                        name="progress"
+                                                        label="Time"
+                                                        value={endTime}
+                                                        placeholder="Select Progress"
+                                                        options={optionsTimes}
+                                                        onchange={handleChangeEndTime} ></lightning-combobox>
+
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+
+
+                                                <br/>
+                                                <p>Repeat</p>
+                                                <lightning-input class="slds-p-left_xx-large" checked={isChecked} style="text-align:left; position:absolute;margin-left:-50px" type="checkbox" onchange={handleChangeCheckbox} >
+                                                </lightning-input>
+                                                <br/>
+                                                <template if:true={frequency}>
+                                                        <div class="slds-m-top_medium slds-m-bottom_x-large">
+                                                            <p>
+                                                                Frequency
+                                                            </p>
+                                                            <lightning-radio-group
+                                                                options={optionsRadio}
+                                                                value={value}
+                                                                type="button"
+                                                                onchange={handleChangeFrequency}>
+                                                            </lightning-radio-group>
+
+                                                            <template if:true={Daily}>
+                                                                <lightning-layout>
+                                                                    <lightning-layout-item>
+                                                                        <lightning-combobox
+                                                                        name="Daily"
+                                                                        value="Daily"
+                                                                        options={optionsDaily}
+                                                                        onchange={handleChangeDaily}
+                                                                        style="width: 146px;"
+                                                                        ></lightning-combobox>
+                                                                    </lightning-layout-item>
+
+                                                                    <template if:true={day}>
+                                                                    <lightning-layout-item>
+                                                                            <lightning-combobox
+                                                                            name="Daily"
+                                                                            value="31"
+                                                                            options={optionsDay}
+                                                                            onchange={handleChangeDay}
+                                                                            style="width: 100px;"
+                                                                        ></lightning-combobox>
+                                                                    </lightning-layout-item>
+                                                                    <lightning-layout-item>
+                                                                        <div style="margin-top: 30px;">
+                                                                            Day(s)
+                                                                        </div>
+                                                                     </lightning-layout-item>
+                                                                 </template>
+                                                                </lightning-layout>
+
+                                                                <div class="slds-form-element slds-p-vertical_x-small">
+
+                                                                    <div class="slds-p-around_medium lgc-bg">
+                                                                        Series End Date
+                                                                        <lightning-helptext content="Events in this series are added to your calendar
+                                                                                                     when they're within one year of the current date."></lightning-helptext>
+                                                                    </div>
+                                                                    <lightning-layout>
+                                                                        <lightning-layout-item>
+                                                                           <!-- <lightning-radio-group name="radioGroup"
+                                                                                options={optionsSeries}
+                                                                                value={value}
+                                                                                type="radio"
+                                                                                onchange={handleChangeDaily}
+                                                                                >
+                                                                            </lightning-radio-group>-->
+
+                                                                                <div class="slds-form-element__control">
+                                                                                  <span class="slds-radio">
+                                                                                    <input type="radio" id="radio-43" onchange={radioValue} value="none" name="default" checked="" />
+                                                                                    <label class="slds-radio__label" for="radio-43">
+                                                                                      <span class="slds-radio_faux"></span>
+                                                                                      <span class="slds-form-element__label">None</span>
+                                                                                    </label>
+                                                                                  </span>
+                                                                                  <span class="slds-radio" style="width: -9px;">
+                                                                                    <input type="radio" id="radio-44" onchange={radioValue} value="after" name="default" />
+                                                                                    <label class="slds-radio__label" for="radio-44">
+                                                                                      <span class="slds-radio_faux"></span>
+                                                                                      <span class="slds-form-element__label">After</span>
+                                                                                    </label>
+                                                                                  </span>
+                                                                                  <br/>
+                                                                                  <span class="slds-radio">
+                                                                                    <input type="radio" id="radio-45" onchange={radioValue} style="width: 19px;" value="on" name="default" />
+                                                                                    <label class="slds-radio__label" for="radio-45">
+                                                                                      <span class="slds-radio_faux"></span>
+                                                                                      <span class="slds-form-element__label">On</span>
+                                                                                    </label>
+                                                                                  </span>
+                                                                                </div>
+
+                                                                        </lightning-layout-item>
+                                                                        <lightning-layout-item>
+                                                                            <div class="slds-m-bottom_x-large">
+                                                                            <lightning-input type="text"  style="width: 50px;" value="30"  disabled={isDisabled}></lightning-input> 
+                                                                            <lightning-input type="date" style="width: 150px;" name="input2"  value="2020-09-07"  disabled={isDisabledDate}></lightning-input>
+                                                                        </div>
+                                                                        </lightning-layout-item>
+                                                                            <div class="slds-m-right_large" style="margin-left: -96px;margin-top:33px;">
+                                                                            Events
+                                                                            </div>
+                                                                    </lightning-layout>
+
+
+
+
+
+                                                                </div>
+                                                            </template>
+
+                                                            <template if:true={Weekly}>
+                                                                <!--weekly-->
+                                                                <lightning-layout>
+                                                                    <lightning-layout-item>
+                                                                        <lightning-combobox
+                                                                        name="Weekly"
+                                                                        value="Weekly"
+                                                                        options={optionsWeekly}
+                                                                        onchange={handleChangeWeekly}
+                                                                        style="width: 146px;cursor;"
+                                                                        ></lightning-combobox>
+                                                                    </lightning-layout-item>
+
+                                                                    <template if:true={week}>
+                                                                    <lightning-layout-item>
+                                                                            <lightning-combobox
+                                                                            name="Daily"
+                                                                            value="31"
+                                                                            options={optionsWeek}
+                                                                            onchange={handleChangeWeekly}
+                                                                            style="width: 100px; cursor:pointer;"
+                                                                        ></lightning-combobox>
+                                                                    </lightning-layout-item>
+                                                                    <lightning-layout-item>
+                                                                        <div style="margin-top: 30px;">
+                                                                            Week(s)
+                                                                        </div>
+                                                                     </lightning-layout-item>
+                                                                 </template>
+                                                                </lightning-layout>
+                                                                <div class="slds-p-around_medium lgc-bg" style="margin-left: -19px;">
+                                                                    On
+                                                                    <lightning-helptext content="Events in this series are added to your calendar
+                                                                                                 when they're within one year of the current date."></lightning-helptext>
+
+                                                                            <lightning-radio-group
+                                                                            options={optionsRadioWeek}
+                                                                            value={value}
+                                                                            type="button"
+                                                                            onchange={selectDayOfWeek}>
+                                                                            </lightning-radio-group>
+                                                                            <br/>
+
+                                                                            <lightning-layout>
+                                                                                <lightning-layout-item>
+
+                                                                                        <div class="slds-form-element__control">
+                                                                                          <span class="slds-radio">
+                                                                                            <input type="radio" id="radio-46" onchange={radioValue} value="none" name="default" checked="" />
+                                                                                            <label class="slds-radio__label" for="radio-46">
+                                                                                              <span class="slds-radio_faux"></span>
+                                                                                              <span class="slds-form-element__label">None</span>
+                                                                                            </label>
+                                                                                          </span>
+                                                                                          <span class="slds-radio" style="width: -9px;">
+                                                                                            <input type="radio" id="radio-47" onchange={radioValue} value="after" name="default" />
+                                                                                            <label class="slds-radio__label" for="radio-47">
+                                                                                              <span class="slds-radio_faux"></span>
+                                                                                              <span class="slds-form-element__label">After</span>
+                                                                                            </label>
+                                                                                          </span>
+                                                                                          <br/>
+                                                                                          <span class="slds-radio">
+                                                                                            <input type="radio" id="radio-48" onchange={radioValue} style="width: 19px;" value="on" name="default" />
+                                                                                            <label class="slds-radio__label" for="radio-48">
+                                                                                              <span class="slds-radio_faux"></span>
+                                                                                              <span class="slds-form-element__label">On</span>
+                                                                                            </label>
+                                                                                          </span>
+                                                                                        </div>
+        
+                                                                                </lightning-layout-item>
+                                                                                <lightning-layout-item>
+                                                                                    <div class="slds-m-bottom_x-large">
+                                                                                    <lightning-input type="text"  style="width: 50px;" value="30"  disabled={isDisabled}></lightning-input> 
+                                                                                    <lightning-input type="date" style="width: 150px;" name="input2"  value="2020-09-07"  disabled={isDisabledDate}></lightning-input>
+                                                                                </div>
+                                                                                </lightning-layout-item>
+                                                                                    <div class="slds-m-right_large" style="margin-left: -96px;margin-top:33px;">
+                                                                                    Events
+                                                                                    </div>
+                                                                            </lightning-layout>
+                                                                 </div>
+                                                            </template>
+
+                                                            <template if:true={Monthly}>
+                                                                <lightning-layout>
+                                                                    <lightning-layout-item>
+                                                                        <lightning-combobox
+                                                                        name="Daily"
+                                                                        value="Daily"
+                                                                        options={optionsDaily}
+                                                                        onchange={handleChangeDaily}
+                                                                        style="width: 146px;"
+                                                                        ></lightning-combobox>
+                                                                    </lightning-layout-item>
+
+                                                                    <template if:true={day}>
+                                                                    <lightning-layout-item>
+                                                                            <lightning-combobox
+                                                                            name="Daily"
+                                                                            value="31"
+                                                                            options={optionsDay}
+                                                                            onchange={handleChangeDay}
+                                                                            style="width: 100px;"
+                                                                        ></lightning-combobox>
+                                                                    </lightning-layout-item>
+                                                                    <lightning-layout-item>
+                                                                        <div style="margin-top: 30px;">
+                                                                            Day(s)
+                                                                        </div>
+                                                                     </lightning-layout-item>
+                                                                 </template>
+                                                                </lightning-layout>
+
+                                                                <div class="slds-form-element slds-p-vertical_x-small">
+
+                                                                    <div class="slds-p-around_medium lgc-bg">
+                                                                        Series End Date
+                                                                        <lightning-helptext content="Events in this series are added to your calendar
+                                                                                                     when they're within one year of the current date."></lightning-helptext>
+                                                                    </div>
+                                                                    <lightning-layout>
+                                                                        <lightning-layout-item>
+                                                                           <!-- <lightning-radio-group name="radioGroup"
+                                                                                options={optionsSeries}
+                                                                                value={value}
+                                                                                type="radio"
+                                                                                onchange={handleChangeDaily}
+                                                                                >
+                                                                            </lightning-radio-group>-->
+
+                                                                                <div class="slds-form-element__control">
+                                                                                  <span class="slds-radio">
+                                                                                    <input type="radio" id="radio-49" onchange={radioValue} value="none" name="default" checked="" />
+                                                                                    <label class="slds-radio__label" for="radio-51">
+                                                                                      <span class="slds-radio_faux"></span>
+                                                                                      <span class="slds-form-element__label">None</span>
+                                                                                    </label>
+                                                                                  </span>
+                                                                                  <span class="slds-radio" style="width: -9px;">
+                                                                                    <input type="radio" id="radio-50" onchange={radioValue} value="after" name="default" />
+                                                                                    <label class="slds-radio__label" for="radio-51">
+                                                                                      <span class="slds-radio_faux"></span>
+                                                                                      <span class="slds-form-element__label">After</span>
+                                                                                    </label>
+                                                                                  </span>
+                                                                                  <br/>
+                                                                                  <span class="slds-radio">
+                                                                                    <input type="radio" id="radio-51" onchange={radioValue} style="width: 19px;" value="on" name="default" />
+                                                                                    <label class="slds-radio__label" for="radio-51">
+                                                                                      <span class="slds-radio_faux"></span>
+                                                                                      <span class="slds-form-element__label">On</span>
+                                                                                    </label>
+                                                                                  </span>
+                                                                                </div>
+
+                                                                        </lightning-layout-item>
+                                                                        <lightning-layout-item>
+                                                                            <div class="slds-m-bottom_x-large">
+                                                                            <lightning-input type="text"  style="width: 50px;" value="30"  disabled={isDisabled}></lightning-input> 
+                                                                            <lightning-input type="date" style="width: 150px;" name="input2"  value="2020-09-07"  disabled={isDisabledDate}></lightning-input>
+                                                                        </div>
+                                                                        </lightning-layout-item>
+                                                                            <div class="slds-m-right_large" style="margin-left: -96px;margin-top:33px;">
+                                                                            Events
+                                                                            </div>
+                                                                    </lightning-layout>
+
+
+
+
+
+                                                                </div>
+                                                            </template>
+
+                                                        </div>
+                                                </template>
+                                            </div>
+
+
+
+                                        </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" title="Non-primary action" onclick={closeModal} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button label="Save & New" title="Non-primary action" onclick={closeModal} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Save" title="Primary action" onclick={closeModal} class="slds-m-left_x-small"></lightning-button>
+
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+ </template>

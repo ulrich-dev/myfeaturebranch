@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="car" type="Voiture__c"/>
+</aura:event>

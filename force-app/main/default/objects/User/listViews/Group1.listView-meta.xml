@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group1</fullName>
+    <columns>FULL_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>custum__c</field>
+        <operation>equals</operation>
+        <value>test</value>
+    </filters>
+    <label>Group1</label>
+    <sharedTo>
+        <group>Queue_name5</group>
+        <group>groupe1</group>
+    </sharedTo>
+</ListView>

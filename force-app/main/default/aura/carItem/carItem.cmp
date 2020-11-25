@@ -1,0 +1,24 @@
+<aura:component>
+    <aura:attribute name="car" type="Voiture__c" />
+    <lightning:card title="{!v.car.Name}" iconName="standard:record" >
+                <p class="slds-p-horizontal_small">
+                   <b> Marque</b>:   {!v.car.Marque__c}
+                 </p>
+                 <p class="slds-p-horizontal_small">
+                     <b>Couleur</b>: {!v.car.Couleur__c}
+                  </p>
+                
+                 <p class="slds-text-heading_medium slds-p-horizontal_small">
+                    <h6>Nombre de places: {!v.car.Nombre_de_places__c} </h6>
+                 </p>
+                 <p class="slds-p-horizontal_small">
+                    <b> Matricule</b>: {!v.car.Matricule__c}
+                 </p>
+                 
+                 <lightning:button variant="brand" label="Edit" iconName="utility:edit" iconPosition="right" onclick="{!c.getId }" />
+                <lightning:button variant="brand" class="mybuttom" label="Delete" iconName="utility:delete" iconPosition="right" onclick="{! c.Deletecar }" />
+                                            
+    </lightning:card>
+    <aura:registerEvent name="Idrecord" type="c:UpdateId"/>
+    <aura:registerEvent name="delcar" type="c:Delcar"/>
+</aura:component>

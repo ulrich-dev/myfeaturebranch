@@ -1,0 +1,147 @@
+<aura:component controller="carController" >
+    <!--definition d'attribut -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="thecarss" event="c:lookupevent" action="{!c.doInit1}"/>
+    <aura:handler name="Idrecord" event="c:UpdateId" action="{!c.handleUpdatecar}"/>
+    <aura:handler name="delcar" event="c:Delcar" action="{!c.Deletecar}"/>
+    <aura:attribute name="thecar" type="Voiture__c" />
+    
+    <aura:attribute name="cars" type="Voiture__c[]" />
+    <aura:attribute name="Idrecord" type="String" />
+    <aura:attribute name="newcar" type="Voiture__c"
+        default="{'sobjectType':'Voiture__c',
+                'Name': '',
+                'Marque__c':'',
+                'Couleur__c':'',
+                'Nombre_de_places__c':'',
+                'Matricule__c':''  }" /> 
+
+   <!-- PAGE HEADER -->
+    <lightning:layout class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem>
+            <lightning:icon iconName="action:new_note" alternativeText="My Car"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Voiture</h1>
+                <h2 class="slds-text-heading--medium">Ma Voiture</h2>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem>
+           
+        </lightning:layoutItem>
+
+    
+        
+
+
+
+    </lightning:layout >
+    
+    <div class="lookup">
+        <lightning:layoutItem  class="slds-grid_align-center" padding="horizontal-small" >
+ 
+                  <c:lookup />
+
+
+          </lightning:layoutItem>
+  </div>
+    <!-- / PAGE HEADER -->
+                <!-- CREATE NEW EXPENSE -->
+             
+
+                <div class="c-container">
+                    <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large">
+                        <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                            <div aria-labelledby="newcarform">
+                                <!-- BOXED AREA -->
+                                <fieldset class="slds-box slds-theme_default slds-container_small">
+                                <legend id="newcarform" class="slds-text-heading_small
+                                  slds-p-vertical_medium">
+                                  Add Car
+                                </legend>
+                                <!-- CREATE NEW CAR FORM -->
+                                <form class="slds-form_stacked">
+                                    <lightning:input aura:id="carform" label="Name"
+                                                     name="Name"
+                                                     value="{!v.newcar.Name}"
+                                                     required="true"/>
+                                  
+                                    <lightning:input aura:id="carform" label="Marque"
+                                                     name="Marque"
+                                                     value="{!v.newcar.Marque__c}"
+                                                     placeholder="Toyota."/>
+                        
+                                    <lightning:input aura:id="carform" label="Couleur"
+                                                     name="Couleur"
+                                                     value="{!v.newcar.Couleur__c}"
+                                                     placeholder="rouge."/>
+                                    
+                                    <lightning:input type="number" aura:id="carform" label="Nombre de place"
+                                                     name="nombreDePlace"
+                                                     value="{!v.newcar.Nombre_de_places__c}"
+                                                     messageWhenRangeUnderflow="Enter an amount that's at least $0.10."/>
+                        
+                                <lightning:input aura:id="carform" label="Matricule"
+                                                     name="Matricule"
+                                                     value="{!v.newcar.Matricule__c}"
+                                                     placeholder="CE78564."/>
+                                <lightning:layout horizontalAlign="end" >
+                                    <lightning:button label="Create"
+                                                      class="slds-m-top_medium"
+                                                      variant="brand"
+                                                      onclick="{!c.clickCreate}"/>
+                                </lightning:layout>
+                                </form>
+                                <!-- / CREATE NEW EXPENSE FORM -->
+                              </fieldset>
+                              <!-- / BOXED AREA -->
+                            </div>
+
+
+                            <fieldset class="slds-box slds-theme_default slds-container_small">
+                                <legend id="newcarform" class="slds-text-heading_small
+                                  slds-p-vertical_medium">
+                                  Edit Car
+                                </legend>
+                              
+                                <c:EditCar thecar="{!v.thecar}"/>
+                           
+                            </fieldset>
+
+                        </lightning:layoutItem>
+                        
+                    </lightning:layout>   
+                       
+                </div>      
+                   
+                            
+                    <div class="liste">
+                            <lightning:layout>
+                                <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                                    <c:carlist cars="{!v.cars}" />
+                                </lightning:layoutItem>
+                                
+                            </lightning:layout>
+                   </div>
+
+
+
+
+
+   
+
+    <!-- / CREATE NEW EXPENSE -->
+    <!-- NEW Car FORM -->
+    <lightning:layout>
+       
+    </lightning:layout>
+    <!-- / NEW EXPENSE FORM -->
+
+  
+     
+    <!-- afficharge de la liste des depenses-->
+  
+  
+    
+</aura:component>
